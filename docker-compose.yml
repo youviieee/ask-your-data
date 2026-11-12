@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:17
+    container_name: ask-your-data
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+    - "127.0.0.1:5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./csvfiles:/csvfiles:ro
+
+
+volumes:
+  pgdata:
+
